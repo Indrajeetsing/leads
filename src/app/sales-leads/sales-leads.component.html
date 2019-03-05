@@ -1,0 +1,73 @@
+<div>
+  <div fxLayout="column">
+    <label class="mat-title m-0">Sales Leads</label>
+    <label class="mat-body">Showing</label>
+  </div>
+  <!-- <table matSort (matSortChange)="sortData($event)">
+  <tr>
+    <th mat-sort-header="lead">Lead Name</th>
+    <th mat-sort-header="rep">Sales Rep</th>
+    <th mat-sort-header="client">Clients</th>
+    <th mat-sort-header="value">Value</th>
+    <th mat-sort-header="date">Date</th>
+    <th>Delete</th>
+  </tr>
+
+  <tr *ngFor="let lead of leads; let leadIndex = index">
+    <td>{{lead.lead}}</td>
+    <td>{{lead.rep}}</td>
+    <td>{{lead.client}}</td>
+    <td>{{lead.value | currency:'USD':true:'1.0-2'}}</td>
+    <td>{{lead.date | date : 'MM/LL/yy'}}</td>
+    <td><mat-icon class="pointer" (click)="deleteRecord(leadIndex)">close</mat-icon></td>
+  </tr>
+</table> -->
+<div  class="mat-elevation-z8">
+
+<table mat-table [dataSource]="leads" matSort>
+
+  <!-- Lead Name Column -->
+  <ng-container matColumnDef="lead">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Lead Name </th>
+    <td mat-cell *matCellDef="let element"> {{element.lead}} </td>
+  </ng-container>
+
+  <!-- Sales Rep Column -->
+  <ng-container matColumnDef="rep">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Sales Rep </th>
+    <td mat-cell *matCellDef="let element"> {{element.rep}} </td>
+  </ng-container>
+
+  <!-- client Column -->
+  <ng-container matColumnDef="client">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Clients </th>
+    <td mat-cell *matCellDef="let element"> {{element.client}} </td>
+  </ng-container>
+
+  <!-- value Column -->
+  <ng-container matColumnDef="value">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Value </th>
+    <td mat-cell *matCellDef="let element"> {{element.value | currency:'USD':true:'1.0-2'}} </td>
+  </ng-container>
+
+  <!-- date Column -->
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.date | date : 'MM/LL/yy'}} </td>
+  </ng-container>
+
+  <!-- delete Column -->
+  <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef>Delete</th>
+      <td mat-cell *matCellDef="let element; let leadIndex = index">
+        <mat-icon class="pointer" (click)="deleteRecord(leadIndex)">close</mat-icon>
+      </td>
+    </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+</div>
+  </div>

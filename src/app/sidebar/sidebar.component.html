@@ -1,0 +1,10 @@
+<div style="position: fixed; top:0;left:0;background:#3eb0f7;height:1250px;">
+  <div [@openClose]="isOpen ? 'open' : 'closed'" (mouseenter)="isOpen=true;" (mouseleave)="isOpen=false;">
+    <mat-list fxFlexFill style="padding:0">
+      <mat-list-item matRipple class="pointer" *ngFor="let menu of sidebar">
+        <mat-icon>{{menu.ICON}}</mat-icon>
+        <span *ngIf="isOpen">&nbsp;&nbsp;{{menu.LABEL}}</span>
+        </mat-list-item>
+    </mat-list>
+  </div>
+</div>
