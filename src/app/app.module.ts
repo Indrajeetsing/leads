@@ -5,7 +5,8 @@ import {MatRippleModule,
 MatIconModule,
 MatPaginatorModule,
 MatSortModule,
-MatTableModule} from '@angular/material';
+MatTableModule,
+MatButtonModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -38,7 +39,8 @@ import { SalesLeadsService } from './sales-leads/sales-leads.service';
     MatSortModule,
     FlexLayoutModule,
     MatPaginatorModule,
-    MatTableModule
+    MatTableModule,
+    MatButtonModule
   ],
   providers: [SalesLeadsService],
   bootstrap: [AppComponent],

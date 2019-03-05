@@ -31,7 +31,7 @@ displayedColumns: string[] = ['lead', 'rep', 'client', 'value', 'date', 'delete'
   deleteRecord(index) {
     // TODO: replace with delete API (couldn't found delete API in swagger docs)
     this.leads.filteredData.splice(index,1);
-    this.leads = this.leads.filteredData;
+    this.leads = new MatTableDataSource(this.leads.filteredData);
   }
 
 }
