@@ -1,36 +1,23 @@
-import { animate, state, style, transition, trigger} from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css'],
-  animations: [
-    trigger('openClose', [
-      state('open', style({
-        width: '200px;',
-      })),
-      state('closed', style({
-        width: '56px;',
-      })),
-      transition('open => closed', [
-        animate('0.1s')
-      ]),
-      transition('closed => open', [
-        animate('0.1s')
-      ]),
-    ])
-  ]
+  styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
 
-isOpen = false;
-sidebar = [
-  { 'LABEL': 'Sales Leads', 'ICON': 'list'},
-  { 'LABEL': 'Contacts', 'ICON': 'contacts'}]
-  constructor() { }
+  isOpen = false;
+  sidebar = [
+    { 'LABEL': 'Sales Leads', 'ICON': 'list', 'PATH': 'sales-leads' },
+    { 'LABEL': 'Contacts', 'ICON': 'contacts', 'PATH': 'contacts' }]
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }
 
+  goToRoute(menu) {
+    this.router.navigate([menu.PATH]);
+  }
 }

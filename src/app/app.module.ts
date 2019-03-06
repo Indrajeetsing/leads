@@ -1,15 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {MatRippleModule,
+import {
+  MatDialogModule,
+  MatFormFieldModule,
+  MatRippleModule,
   MatListModule,
-MatIconModule,
-MatPaginatorModule,
-MatSortModule,
-MatTableModule,
-MatButtonModule} from '@angular/material';
+  MatIconModule,
+  MatInputModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatTableModule,
+  MatButtonModule
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +24,7 @@ import { BannerMessageComponent } from './banner-message/banner-message.componen
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { SalesLeadsComponent } from './sales-leads/sales-leads.component';
 import { SalesLeadsService } from './sales-leads/sales-leads.service';
+import { DialogComponent } from './dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +33,7 @@ import { SalesLeadsService } from './sales-leads/sales-leads.service';
     BannerMessageComponent,
     ToolbarComponent,
     SalesLeadsComponent,
+    DialogComponent,
     // CurrencyPipe
   ],
   imports: [
@@ -40,10 +48,16 @@ import { SalesLeadsService } from './sales-leads/sales-leads.service';
     FlexLayoutModule,
     MatPaginatorModule,
     MatTableModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    ReactiveFormsModule,
+    MatInputModule
   ],
   providers: [SalesLeadsService],
   bootstrap: [AppComponent],
-  // exports: [CurrencyPipe]
+  entryComponents: [
+    DialogComponent
+  ]
 })
 export class AppModule { }

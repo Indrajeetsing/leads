@@ -1,0 +1,33 @@
+<div>
+  <form [formGroup]="leadForm" (ngSubmit)="save()">
+    <h1 mat-dialog-title>Add sales leads</h1>
+    <mat-dialog-content fxLayout="column">
+      <mat-form-field fxFlex appearance="outline">
+        <input matInput placeholder="Leads" formControlName="lead">
+        <mat-error>Required field</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="Sales representative" formControlName="rep">
+        <mat-error>Required field</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="Clients" formControlName="client">
+        <mat-error>Required field</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="Value" type="number" formControlName="value">
+        <mat-error>Required field</mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="Date" type="number" formControlName="date">
+        <mat-error>Required field</mat-error>
+        <!-- <mat-error *ngIf="leadForm.errors.notDate"></mat-error> -->
+      </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions class="justify-content-end" fxLayoutGap="10px">
+      <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog.[mat-dialog-close]="false" -->
+      <button mat-flat-button color="primary">Save</button>
+      <button mat-stroked-button color="primary" type="button" mat-dialog-close>Cancel</button>
+    </mat-dialog-actions>
+  </form>
+</div>
