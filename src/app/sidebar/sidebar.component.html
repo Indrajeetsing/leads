@@ -1,6 +1,6 @@
-<div style="background:#3eb0f7;height:100vh;" [ngStyle]="{width: isOpen ? '200px' : '56px'}">
+<div class="sidebar-container" [ngStyle]="{width: isOpen ? '200px' : '56px'}">
   <div (mouseenter)="isOpen=true;" (mouseleave)="isOpen=false;">
-    <mat-list fxFlexFill style="padding:0">
+    <mat-list fxFlexFill>
       <mat-list-item matRipple class="pointer" *ngFor="let menu of sidebar" (click)="goToRoute(menu)">
         <mat-icon>{{menu.ICON}}</mat-icon>
         <span *ngIf="isOpen">&nbsp;&nbsp;{{menu.LABEL}}</span>

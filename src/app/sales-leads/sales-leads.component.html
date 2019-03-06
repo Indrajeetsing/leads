@@ -6,25 +6,7 @@
   <div fxLayout="row" fxLayoutAlign="flex-end">
     <button mat-flat-button color="primary" (click)="addLead()">Add lead</button>
   </div>
-  <!-- <table matSort (matSortChange)="sortData($event)">
-  <tr>
-    <th mat-sort-header="lead">Lead Name</th>
-    <th mat-sort-header="rep">Sales Rep</th>
-    <th mat-sort-header="client">Clients</th>
-    <th mat-sort-header="value">Value</th>
-    <th mat-sort-header="date">Date</th>
-    <th>Delete</th>
-  </tr>
 
-  <tr *ngFor="let lead of leads; let leadIndex = index">
-    <td>{{lead.lead}}</td>
-    <td>{{lead.rep}}</td>
-    <td>{{lead.client}}</td>
-    <td>{{lead.value | currency:'USD':true:'1.0-2'}}</td>
-    <td>{{lead.date | date : 'MM/LL/yy'}}</td>
-    <td><mat-icon class="pointer" (click)="deleteRecord(leadIndex)">close</mat-icon></td>
-  </tr>
-</table> -->
   <div class="mat-elevation-z8">
 
     <table mat-table [dataSource]="leads" matSort>
@@ -71,6 +53,16 @@
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" (page)="pageEvent = updatePagesize($event)" showFirstLastButtons></mat-paginator>
+
+    <!-- Spinner -->
+    <div fxLayoutAlign="center center" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <!-- No data found -->
+    <div fxLayoutAlign="center center" *ngIf="leads.length == 0 && !loading">
+      <label class="mat-h1">No Data Found</label>
+    </div>
 
   </div>
 </div>

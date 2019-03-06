@@ -10,7 +10,11 @@ import {
   MatPaginatorModule,
   MatSortModule,
   MatTableModule,
-  MatButtonModule
+  MatButtonModule,
+  MatToolbarModule,
+  MatProgressSpinnerModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -20,21 +24,24 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
-import { BannerMessageComponent } from './banner-message/banner-message.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { SalesLeadsComponent } from './sales-leads/sales-leads.component';
 import { SalesLeadsService } from './sales-leads/sales-leads.service';
 import { DialogComponent } from './dialog/dialog.component';
+import { ContactsComponent } from './contacts/contacts.component';
+import { ReportsComponent } from './reports/reports.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
-    BannerMessageComponent,
     ToolbarComponent,
     SalesLeadsComponent,
     DialogComponent,
-    // CurrencyPipe
+    ContactsComponent,
+    ReportsComponent,
+    CalendarComponent
   ],
   imports: [
     BrowserModule,
@@ -52,9 +59,13 @@ import { DialogComponent } from './dialog/dialog.component';
     MatDialogModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [SalesLeadsService],
+  providers: [MatDatepickerModule, SalesLeadsService],
   bootstrap: [AppComponent],
   entryComponents: [
     DialogComponent

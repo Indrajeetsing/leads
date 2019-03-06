@@ -11,6 +11,7 @@ import { DialogComponent } from '../dialog/dialog.component';
   templateUrl: './sales-leads.component.html',
   styleUrls: ['./sales-leads.component.css']
 })
+
 export class SalesLeadsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -18,6 +19,7 @@ export class SalesLeadsComponent implements OnInit {
   displayedColumns: string[] = ['lead', 'rep', 'client', 'value', 'date', 'delete'];
   pageSize = 5;
   totalRecords;
+  loading = true;
 
   constructor(private salesLeadsService: SalesLeadsService, private dialog: MatDialog) {
   }
@@ -26,6 +28,7 @@ export class SalesLeadsComponent implements OnInit {
     this.getLeads();
   }
 
+  // delete a record from table
   deleteRecord(index) {
     // TODO: replace with delete API (couldn't found delete API in swagger docs)
     this.leads.filteredData.splice(index, 1);
@@ -35,23 +38,28 @@ export class SalesLeadsComponent implements OnInit {
     this.totalRecords = this.leads.filteredData.length;
   }
 
+  // update page size on page chnage events
   updatePagesize(event: any) {
     this.pageSize = event.pageSize;
     this.totalRecords = event.length;
   }
 
+  // get leads from server
   getLeads() {
     this.salesLeadsService.getLeads().subscribe(
       (response: any) => {
         this.leads = new MatTableDataSource(response.payload);
         this.leads.sort = this.sort;
         this.leads.paginator = this.paginator
-        this.totalRecords = this.leads.filteredData.length;
+        this.totalRecords = response.count;
+        this.loading = false;
       }, (error: any) => {
+        this.loading = false;
         console.log(error);
       });
   }
 
+  // open dialog and add lead
   addLead() {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '500px',
@@ -64,5 +72,4 @@ export class SalesLeadsComponent implements OnInit {
       }
     });
   }
-
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,16 +6,15 @@ import { Router } from '@angular/router';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
 
   isOpen = false;
   sidebar = [
     { 'LABEL': 'Sales Leads', 'ICON': 'list', 'PATH': 'sales-leads' },
-    { 'LABEL': 'Contacts', 'ICON': 'contacts', 'PATH': 'contacts' }]
+    { 'LABEL': 'Contacts', 'ICON': 'contacts', 'PATH': 'contacts' },
+    { 'LABEL': 'Calendar', 'ICON': 'calendar_today', 'PATH': 'calendar' },
+    { 'LABEL': 'Reports', 'ICON': 'list_alt', 'PATH': 'reports' }]
   constructor(private router: Router) { }
-
-  ngOnInit() {
-  }
 
   goToRoute(menu) {
     this.router.navigate([menu.PATH]);

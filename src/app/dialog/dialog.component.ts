@@ -22,13 +22,16 @@ export class DialogComponent {
     lead: ['', Validators.required],
     rep: ['', Validators.required],
     client: ['', Validators.required],
-    value: [null, Validators.required],
+    value: [null, [Validators.required, Validators.pattern(/^[0-9]/)]],
     date: [null, Validators.required]
   });
 
   save() {
     console.log(this.leadForm);
     if (this.leadForm.valid) {
+      //converting date to tiemestamp
+      // this.leadForm.controls['date'].setValue(new Date(this.leadForm.value.date).getTime());
+      this.leadForm.controls['date'].setValue(Date.parse(this.leadForm.value.date));
       this.salesLeadsService.postLead(this.leadForm.value).subscribe(
         (response: any) => {
           this.dialogRef.close('successfully added');
