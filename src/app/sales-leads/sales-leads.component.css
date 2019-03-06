@@ -14,3 +14,7 @@ table {
   font-weight: bold;
   color: black;
 }
+
+.mat-header-cell{
+  color: black;
+}
