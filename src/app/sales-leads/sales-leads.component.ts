@@ -36,12 +36,18 @@ export class SalesLeadsComponent implements OnInit {
     this.leads.sort = this.sort;
     this.leads.paginator = this.paginator;
     this.totalRecords = this.leads.filteredData.length;
+    if (this.totalRecords < this.pageSize) {
+      this.pageSize = this.totalRecords;
+    }
   }
 
   // update page size on page chnage events
   updatePagesize(event: any) {
-    this.pageSize = event.pageSize;
     this.totalRecords = event.length;
+    const startIndex = event.pageIndex * event.pageSize;
+    const endIndex = startIndex + event.pageSize;
+    const itemsShowed = this.leads.filteredData.slice(startIndex, endIndex);
+    this.pageSize = itemsShowed.length;
   }
 
   // get leads from server
@@ -53,6 +59,9 @@ export class SalesLeadsComponent implements OnInit {
         this.leads.paginator = this.paginator
         this.totalRecords = response.count;
         this.loading = false;
+        if (this.totalRecords < this.pageSize) {
+          this.pageSize = this.totalRecords;
+        }
       }, (error: any) => {
         this.loading = false;
         console.log(error);
