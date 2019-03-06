@@ -31,8 +31,9 @@ export class DialogComponent {
     if (this.leadForm.valid) {
       //converting date to tiemestamp
       // this.leadForm.controls['date'].setValue(new Date(this.leadForm.value.date).getTime());
-      this.leadForm.controls['date'].setValue(Date.parse(this.leadForm.value.date));
-      this.salesLeadsService.postLead(this.leadForm.value).subscribe(
+      const leadObj = this.leadForm.value;
+      leadObj.date = Date.parse(this.leadForm.value.date)
+      this.salesLeadsService.postLead(leadObj).subscribe(
         (response: any) => {
           this.dialogRef.close('successfully added');
         }, (error: any) => {
