@@ -25,6 +25,7 @@ export class DialogComponent {
     value: [null, [Validators.required, Validators.pattern(/^[0-9]/)]],
     date: [null, Validators.required]
   });
+  backendErrorMessage = '';
 
   save() {
     console.log(this.leadForm);
@@ -37,7 +38,8 @@ export class DialogComponent {
         (response: any) => {
           this.dialogRef.close('successfully added');
         }, (error: any) => {
-          console.log(error);
+          // TODO: here i expect error message from backend(only error message)
+          this.backendErrorMessage = 'Try again with correct values';
         }
       )
     }

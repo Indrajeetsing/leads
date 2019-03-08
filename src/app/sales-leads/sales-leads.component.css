@@ -10,11 +10,23 @@ table {
     color: #2AB7CC;
 }
 
-.mat-column-rep{
+::ng-deep.mat-sort-header-sorted {
+font-weight: bold;
+}
+
+.highlight {
   font-weight: bold;
-  color: black;
+  font-size: 14px;
+}
+.normalWeight {
+  font-weight: normal;
+  font-size: 14px;
 }
 
 .mat-header-cell{
   color: black;
+}
+
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+    border: none !important;
 }

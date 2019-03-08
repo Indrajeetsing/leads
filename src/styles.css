@@ -12,7 +12,23 @@ body {
   margin: 0;
 }
 
+.p-0 {
+  padding: 0 !important;
+}
+
 .p-10{
   padding: 10px;
 }
-  
+
+.blue {
+  color: #2AB7CC;
+}
+
+.blue-background {
+  background-color: #2AB7CC;
+  color: white;
+}
+
+.border{
+  border: 1px solid !important;
+}

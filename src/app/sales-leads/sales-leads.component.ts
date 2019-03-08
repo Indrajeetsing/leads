@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { SalesLeadsService } from './sales-leads.service';
 import { CurrencyPipe, DatePipe } from '@angular/common';
-import { PageEvent } from '@angular/material';
+import { PageEvent, Sort } from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
 
@@ -20,6 +20,7 @@ export class SalesLeadsComponent implements OnInit {
   pageSize = 5;
   totalRecords;
   loading = true;
+  sortedColumn = '';
 
   constructor(private salesLeadsService: SalesLeadsService, private dialog: MatDialog) {
   }
@@ -66,6 +67,15 @@ export class SalesLeadsComponent implements OnInit {
         this.loading = false;
         console.log(error);
       });
+  }
+
+  // checking sorted column and highlighting
+  sortData(event: Sort) {
+    if (event.direction !== '') {
+      this.sortedColumn = event.active;
+    } else {
+      this.sortedColumn = '';
+    }
   }
 
   // open dialog and add lead

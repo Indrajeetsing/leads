@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,9 +13,5 @@ export class SidebarComponent {
     { 'LABEL': 'Contacts', 'ICON': 'contacts', 'PATH': 'contacts' },
     { 'LABEL': 'Calendar', 'ICON': 'calendar_today', 'PATH': 'calendar' },
     { 'LABEL': 'Reports', 'ICON': 'list_alt', 'PATH': 'reports' }]
-  constructor(private router: Router) { }
-
-  goToRoute(menu) {
-    this.router.navigate([menu.PATH]);
-  }
+  constructor() { }
 }

@@ -1,7 +1,11 @@
 <div class="sidebar-container" [ngStyle]="{width: isOpen ? '200px' : '56px'}">
   <div (mouseenter)="isOpen=true;" (mouseleave)="isOpen=false;">
-    <mat-list fxFlexFill>
-      <mat-list-item matRipple class="pointer" *ngFor="let menu of sidebar" (click)="goToRoute(menu)">
+    <mat-list fxFlexFill class="p-0">
+      <mat-list-item>
+        <mat-icon *ngIf="!isOpen">account_box</mat-icon>
+        <span *ngIf="isOpen" class="mat-title heading-margin">Accounts</span>
+      </mat-list-item>
+      <mat-list-item matRipple class="pointer" *ngFor="let menu of sidebar" routerLink="/{{menu.PATH}}" [routerLinkActive]="['is-active']">
         <mat-icon>{{menu.ICON}}</mat-icon>
         <span *ngIf="isOpen">&nbsp;&nbsp;{{menu.LABEL}}</span>
       </mat-list-item>
