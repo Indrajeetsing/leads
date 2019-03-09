@@ -10,7 +10,7 @@ export class SidebarComponent {
   isOpen = false;
   sidebar = [
     { 'LABEL': 'Sales Leads', 'ICON': 'list', 'PATH': 'sales-leads' },
-    { 'LABEL': 'Contacts', 'ICON': 'contacts', 'PATH': 'contacts' },
+    { 'LABEL': 'Contacts', 'ICON': 'people', 'PATH': 'contacts' },
     { 'LABEL': 'Calendar', 'ICON': 'calendar_today', 'PATH': 'calendar' },
     { 'LABEL': 'Reports', 'ICON': 'list_alt', 'PATH': 'reports' }]
   constructor() { }

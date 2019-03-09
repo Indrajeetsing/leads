@@ -48,20 +48,17 @@ export class SalesLeadsComponent implements OnInit {
         this.leads.sort = this.sort;
         this.leads.paginator = this.paginator;
         this.totalRecords = this.leads.filteredData.length;
-        this.displayingRecords = this.leads.connect().value.length;
-        this.displayingRecords = (this.displayingRecords === 0 && this.totalRecords > 0) ? this.pageSize : this.displayingRecords;
+        this.updatePagesize(this.paginator);
       }
     });
   }
 
   // update page size on page chnage events
   updatePagesize(event: any) {
-    this.totalRecords = event.length;
     this.pageSize = event.pageSize;
     const startIndex = event.pageIndex * event.pageSize;
     const endIndex = startIndex + event.pageSize;
-    const itemsShowed = this.leads.filteredData.slice(startIndex, endIndex);
-    this.displayingRecords = itemsShowed.length;
+    this.displayingRecords = (endIndex > this.totalRecords) ? this.totalRecords : endIndex;
   }
 
   // get leads from server
@@ -71,8 +68,8 @@ export class SalesLeadsComponent implements OnInit {
         this.totalRecords = response.count;
         this.leads = new MatTableDataSource(response.payload);
         this.leads.sort = this.sort;
-        this.leads.paginator = this.paginator
-        this.displayingRecords = this.leads.connect().value.length;
+        this.leads.paginator = this.paginator;
+        this.updatePagesize(this.paginator);
         this.loading = false;
       }, (error: any) => {
         this.loading = false;

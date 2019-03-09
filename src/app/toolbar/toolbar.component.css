@@ -2,9 +2,13 @@
   height: 56px;
   min-height: 56px;
   background: black;
-    color: white;
+  color: white;
 }
 
 .p-10 {
   padding: 10px;
 }
+
+/* ::ng-deep .mat-form-field-underline {
+  display: none;
+} */
