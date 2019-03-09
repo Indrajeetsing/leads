@@ -30,16 +30,15 @@ export class SalesLeadsComponent implements OnInit {
   }
 
   // delete a record from table
-  deleteRecord(index) {
+  deleteRecord(element) {
     // TODO: replace with delete API (couldn't found delete API in swagger docs)
+    const index = this.leads.filteredData.indexOf(element);
     this.leads.filteredData.splice(index, 1);
     this.leads = new MatTableDataSource(this.leads.filteredData);
     this.leads.sort = this.sort;
     this.leads.paginator = this.paginator;
     this.totalRecords = this.leads.filteredData.length;
-    if (this.totalRecords < this.pageSize) {
-      this.pageSize = this.totalRecords;
-    }
+    this.pageSize = this.leads.connect().value.length;
   }
 
   // update page size on page chnage events
@@ -59,10 +58,8 @@ export class SalesLeadsComponent implements OnInit {
         this.leads.sort = this.sort;
         this.leads.paginator = this.paginator
         this.totalRecords = response.count;
+        this.pageSize = this.leads.connect().value.length;
         this.loading = false;
-        if (this.totalRecords < this.pageSize) {
-          this.pageSize = this.totalRecords;
-        }
       }, (error: any) => {
         this.loading = false;
         console.log(error);
