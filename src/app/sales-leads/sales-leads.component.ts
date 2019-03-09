@@ -18,10 +18,11 @@ export class SalesLeadsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   leads: any = [];
   displayedColumns: string[] = ['lead', 'rep', 'client', 'value', 'date', 'delete'];
-  pageSize = 5;
+  displayingRecords = 5;
   totalRecords = 0;
   loading = true;
   sortedColumn = '';
+  pageSize = 5;
 
   constructor(private salesLeadsService: SalesLeadsService, private dialog: MatDialog) {
   }
@@ -47,7 +48,8 @@ export class SalesLeadsComponent implements OnInit {
         this.leads.sort = this.sort;
         this.leads.paginator = this.paginator;
         this.totalRecords = this.leads.filteredData.length;
-        this.pageSize = this.leads.connect().value.length;
+        this.displayingRecords = this.leads.connect().value.length;
+        this.displayingRecords = (this.displayingRecords === 0 && this.totalRecords > 0) ? this.pageSize : this.displayingRecords;
       }
     });
   }
@@ -55,10 +57,11 @@ export class SalesLeadsComponent implements OnInit {
   // update page size on page chnage events
   updatePagesize(event: any) {
     this.totalRecords = event.length;
+    this.pageSize = event.pageSize;
     const startIndex = event.pageIndex * event.pageSize;
     const endIndex = startIndex + event.pageSize;
     const itemsShowed = this.leads.filteredData.slice(startIndex, endIndex);
-    this.pageSize = itemsShowed.length;
+    this.displayingRecords = itemsShowed.length;
   }
 
   // get leads from server
@@ -69,7 +72,7 @@ export class SalesLeadsComponent implements OnInit {
         this.leads = new MatTableDataSource(response.payload);
         this.leads.sort = this.sort;
         this.leads.paginator = this.paginator
-        this.pageSize = this.leads.connect().value.length;
+        this.displayingRecords = this.leads.connect().value.length;
         this.loading = false;
       }, (error: any) => {
         this.loading = false;
@@ -79,11 +82,7 @@ export class SalesLeadsComponent implements OnInit {
 
   // checking sorted column and highlighting
   sortData(event: Sort) {
-    if (event.direction !== '') {
-      this.sortedColumn = event.active;
-    } else {
-      this.sortedColumn = '';
-    }
+    this.sortedColumn = (event.direction !== '') ? event.active : '';
   }
 
   // open dialog and add lead

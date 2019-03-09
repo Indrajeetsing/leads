@@ -1,7 +1,7 @@
 <div fxLayout="column" fxLayoutGap="10px">
   <div fxLayout="column">
     <label class="mat-title m-0">Sales Leads</label>
-    <label class="mat-body">Showing {{pageSize}} of {{totalRecords}}</label>
+    <label class="mat-body">Showing {{displayingRecords}} of {{totalRecords}}</label>
   </div>
   <div fxLayout="row" fxLayoutAlign="flex-end">
     <button mat-flat-button class="blue-background" (click)="addLead()">Add lead</button>
@@ -63,7 +63,7 @@
       <label class="mat-h1">No Data Found</label>
     </div>
 
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" (page)="pageEvent = updatePagesize($event)" showFirstLastButtons></mat-paginator>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" [pageSize]="pageSize" (page)="pageEvent = updatePagesize($event)" showFirstLastButtons></mat-paginator>
   </div>
 
 </div>
