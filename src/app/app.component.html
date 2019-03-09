@@ -1,12 +1,15 @@
-<app-toolbar>
+<div fxLayout="column" style="min-width: fit-content;">
 
-</app-toolbar>
-<div fxLayout="row">
-  <app-sidebar>
-  </app-sidebar>
-  <div fxFlex class="p-10">
+  <app-toolbar>
 
-    <router-outlet>
-    </router-outlet>
+  </app-toolbar>
+  <div>
+    <app-sidebar>
+    </app-sidebar>
+    <div fxFlex class="p-10">
+
+      <router-outlet>
+      </router-outlet>
+    </div>
   </div>
 </div>

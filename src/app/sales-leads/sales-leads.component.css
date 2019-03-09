@@ -10,6 +10,7 @@ table {
     color: #2AB7CC;
 }
 
+/**ng-deep is deprecated wait untill google release replacement of this**/
 ::ng-deep.mat-sort-header-sorted {
 font-weight: bold;
 }
