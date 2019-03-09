@@ -5,6 +5,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { PageEvent, Sort } from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
+import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-sales-leads',
@@ -18,7 +19,7 @@ export class SalesLeadsComponent implements OnInit {
   leads: any = [];
   displayedColumns: string[] = ['lead', 'rep', 'client', 'value', 'date', 'delete'];
   pageSize = 5;
-  totalRecords;
+  totalRecords = 0;
   loading = true;
   sortedColumn = '';
 
@@ -31,14 +32,24 @@ export class SalesLeadsComponent implements OnInit {
 
   // delete a record from table
   deleteRecord(element) {
-    // TODO: replace with delete API (couldn't found delete API in swagger docs)
-    const index = this.leads.filteredData.indexOf(element);
-    this.leads.filteredData.splice(index, 1);
-    this.leads = new MatTableDataSource(this.leads.filteredData);
-    this.leads.sort = this.sort;
-    this.leads.paginator = this.paginator;
-    this.totalRecords = this.leads.filteredData.length;
-    this.pageSize = this.leads.connect().value.length;
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '500px',
+      data: element.lead
+    });
+
+    //Event after dialog is closed
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // TODO: replace with delete API (couldn't found delete API in swagger docs)
+        const index = this.leads.filteredData.indexOf(element);
+        this.leads.filteredData.splice(index, 1);
+        this.leads = new MatTableDataSource(this.leads.filteredData);
+        this.leads.sort = this.sort;
+        this.leads.paginator = this.paginator;
+        this.totalRecords = this.leads.filteredData.length;
+        this.pageSize = this.leads.connect().value.length;
+      }
+    });
   }
 
   // update page size on page chnage events
@@ -54,10 +65,10 @@ export class SalesLeadsComponent implements OnInit {
   getLeads() {
     this.salesLeadsService.getLeads().subscribe(
       (response: any) => {
+        this.totalRecords = response.count;
         this.leads = new MatTableDataSource(response.payload);
         this.leads.sort = this.sort;
         this.leads.paginator = this.paginator
-        this.totalRecords = response.count;
         this.pageSize = this.leads.connect().value.length;
         this.loading = false;
       }, (error: any) => {

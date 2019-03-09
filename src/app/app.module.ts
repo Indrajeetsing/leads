@@ -31,6 +31,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { ContactsComponent } from './contacts/contacts.component';
 import { ReportsComponent } from './reports/reports.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { CalendarComponent } from './calendar/calendar.component';
     DialogComponent,
     ContactsComponent,
     ReportsComponent,
-    CalendarComponent
+    CalendarComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ import { CalendarComponent } from './calendar/calendar.component';
   providers: [MatDatepickerModule, SalesLeadsService],
   bootstrap: [AppComponent],
   entryComponents: [
-    DialogComponent
+    DialogComponent,
+    ConfirmationDialogComponent
   ]
 })
 export class AppModule { }

@@ -9,7 +9,6 @@
 
   <div>
     <!--class="mat-elevation-z8"-->
-
     <table mat-table [dataSource]="leads" matSort (matSortChange)="sortData($event)">
 
       <!-- Lead Name Column -->
@@ -53,7 +52,6 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
-    <mat-paginator [pageSizeOptions]="[5, 10, 20]" (page)="pageEvent = updatePagesize($event)" showFirstLastButtons></mat-paginator>
 
     <!-- Spinner -->
     <div fxLayoutAlign="center center" *ngIf="loading">
@@ -61,9 +59,11 @@
     </div>
 
     <!-- No data found -->
-    <div fxLayoutAlign="center center" *ngIf="leads.length == 0 && !loading">
+    <div fxLayoutAlign="center center" *ngIf="totalRecords == 0 && !loading">
       <label class="mat-h1">No Data Found</label>
     </div>
 
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" (page)="pageEvent = updatePagesize($event)" showFirstLastButtons></mat-paginator>
   </div>
+
 </div>
