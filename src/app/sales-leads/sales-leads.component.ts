@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { SalesLeadsService } from './sales-leads.service';
+import { MatPaginator, MatSort, MatTableDataSource, PageEvent, Sort, MatDialog } from '@angular/material';
 import { CurrencyPipe, DatePipe } from '@angular/common';
-import { PageEvent, Sort } from '@angular/material';
-import { MatDialog } from '@angular/material';
+import { SelectionModel } from '@angular/cdk/collections';
 import { DialogComponent } from '../dialog/dialog.component';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
+import { SalesLeadsService } from './sales-leads.service';
 
 @Component({
   selector: 'app-sales-leads',
@@ -17,13 +16,14 @@ export class SalesLeadsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   pageEvent: PageEvent;
-  leads: any = [];
-  displayedColumns: string[] = ['lead', 'rep', 'client', 'value', 'date', 'delete'];
+  leads = new MatTableDataSource<lead>([]);
+  displayedColumns: string[] = ['select', 'lead', 'rep', 'client', 'value', 'date', 'delete'];
   displayingRecords = 5;
   totalRecords = 0;
   loading = true;
   sortedColumn = '';
   pageSize = 5;
+  selection = new SelectionModel(true, []);
 
   constructor(private salesLeadsService: SalesLeadsService, private dialog: MatDialog) {
   }
@@ -45,7 +45,7 @@ export class SalesLeadsComponent implements OnInit {
         // TODO: replace with delete API (couldn't found delete API in swagger docs)
         const index = this.leads.filteredData.indexOf(element);
         this.leads.filteredData.splice(index, 1);
-        this.leads = new MatTableDataSource(this.leads.filteredData);
+        this.leads = new MatTableDataSource<lead>(this.leads.filteredData);
         this.leads.sort = this.sort;
         this.leads.paginator = this.paginator;
         this.totalRecords = this.leads.filteredData.length;
@@ -68,7 +68,8 @@ export class SalesLeadsComponent implements OnInit {
     this.salesLeadsService.getLeads().subscribe(
       (response: any) => {
         this.totalRecords = response.count;
-        this.leads = new MatTableDataSource(response.payload);
+        this.leads = new MatTableDataSource<lead>(response.payload);
+        this.selection = new SelectionModel<lead>(true, []);
         this.leads.sort = this.sort;
         this.leads.paginator = this.paginator;
         this.updatePagesize(this.paginator);
@@ -98,4 +99,50 @@ export class SalesLeadsComponent implements OnInit {
       }
     });
   }
+
+  // Whether the number of selected elements matches the total number of rows.
+  isAllSelected() {
+    const numSelected = this.selection.selected.length;
+    const numRows = this.leads.data.length;
+    return numSelected === numRows;
+  }
+
+  // Selects all rows if they are not all selected; otherwise clear selection.
+  masterToggle() {
+    this.isAllSelected() ?
+      this.selection.clear() :
+      this.leads.data.forEach(row => this.selection.select(row));
+  }
+
+  // deleteing selected records
+  deleteSelectedRows() {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      width: '500px',
+      data: `${this.selection.selected.length} records`
+    });
+
+    //Event after dialog is closed
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.selection.selected.forEach(item => {
+          const index: number = this.leads.filteredData.findIndex(d => d === item);
+          this.leads.filteredData.splice(index, 1)
+        });
+        this.leads = new MatTableDataSource<lead>(this.leads.filteredData);
+        this.leads.sort = this.sort;
+        this.leads.paginator = this.paginator;
+        this.totalRecords = this.leads.filteredData.length;
+        this.updatePagesize(this.paginator);
+        this.selection = new SelectionModel<lead>(true, []);
+      }
+    });
+  }
+}
+
+export interface lead {
+  lead: string;
+  rep: string;
+  client: string;
+  value: number;
+  date: number;
 }

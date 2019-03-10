@@ -14,7 +14,8 @@ import {
   MatToolbarModule,
   MatProgressSpinnerModule,
   MatDatepickerModule,
-  MatNativeDateModule
+  MatNativeDateModule,
+  MatCheckboxModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
@@ -65,7 +66,8 @@ import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-
     MatToolbarModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatCheckboxModule
   ],
   providers: [MatDatepickerModule, SalesLeadsService],
   bootstrap: [AppComponent],
