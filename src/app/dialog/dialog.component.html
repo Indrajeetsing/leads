@@ -27,7 +27,8 @@
     </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions class="justify-content-end" fxLayoutGap="10px">
-    <button mat-flat-button color="primary">Save</button>
+    <button mat-flat-button color="primary" *ngIf="!isLoading">Save</button>
+    <mat-spinner [diameter]="30" *ngIf="isLoading"></mat-spinner>
     <button mat-stroked-button color="primary" class="border" type="button" mat-dialog-close>Cancel</button>
   </mat-dialog-actions>
 </form>

@@ -93,6 +93,7 @@ export class SalesLeadsComponent implements OnInit {
     //Event after dialog is closed
     dialogRef.afterClosed().subscribe(result => {
       if (result === 'successfully added') {
+        this.loading = true;
         this.getLeads();
       }
     });

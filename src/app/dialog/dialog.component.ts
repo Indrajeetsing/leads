@@ -26,6 +26,7 @@ export class DialogComponent {
     date: [null, Validators.required]
   });
   backendErrorMessage = '';
+  isLoading = false;
 
   save() {
     console.log(this.leadForm);
@@ -34,12 +35,15 @@ export class DialogComponent {
       // this.leadForm.controls['date'].setValue(new Date(this.leadForm.value.date).getTime());
       const leadObj = this.leadForm.value;
       leadObj.date = Date.parse(this.leadForm.value.date)
+      this.isLoading = true;
       this.salesLeadsService.postLead(leadObj).subscribe(
         (response: any) => {
+          this.isLoading = false;
           this.dialogRef.close('successfully added');
         }, (error: any) => {
           // TODO: here i expect error message from backend(only error message)
           this.backendErrorMessage = 'Try again with correct values';
+          this.isLoading = false;
         }
       )
     }
