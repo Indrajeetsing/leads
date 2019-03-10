@@ -16,6 +16,7 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 export class SalesLeadsComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  pageEvent: PageEvent;
   leads: any = [];
   displayedColumns: string[] = ['lead', 'rep', 'client', 'value', 'date', 'delete'];
   displayingRecords = 5;
@@ -59,6 +60,7 @@ export class SalesLeadsComponent implements OnInit {
     const startIndex = event.pageIndex * event.pageSize;
     const endIndex = startIndex + event.pageSize;
     this.displayingRecords = (endIndex > this.totalRecords) ? this.totalRecords : endIndex;
+    return event;
   }
 
   // get leads from server
