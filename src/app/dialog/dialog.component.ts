@@ -7,7 +7,7 @@ import { SalesLeadsService } from '../sales-leads/sales-leads.service';
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.css']
+  styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent {
 

@@ -10,7 +10,7 @@ import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation
 @Component({
   selector: 'app-sales-leads',
   templateUrl: './sales-leads.component.html',
-  styleUrls: ['./sales-leads.component.css']
+  styleUrls: ['./sales-leads.component.scss']
 })
 
 export class SalesLeadsComponent implements OnInit {

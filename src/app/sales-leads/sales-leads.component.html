@@ -4,7 +4,7 @@
     <label class="mat-body">Showing {{displayingRecords}} of {{totalRecords}}</label>
   </div>
   <div fxLayout="row" fxLayoutAlign="flex-end">
-    <button mat-flat-button class="blue-background" (click)="addLead()">Add lead</button>
+    <button mat-flat-button color="primary" (click)="addLead()">Add lead</button>
   </div>
 
   <div>
@@ -45,7 +45,7 @@
       <ng-container matColumnDef="delete">
         <th mat-header-cell *matHeaderCellDef>Delete</th>
         <td mat-cell *matCellDef="let element;">
-          <mat-icon class="pointer blue" (click)="deleteRecord(element)">close</mat-icon>
+          <mat-icon color="primary" class="pointer" (click)="deleteRecord(element)">close</mat-icon>
         </td>
       </ng-container>
 
