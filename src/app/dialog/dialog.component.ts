@@ -22,7 +22,7 @@ export class DialogComponent {
     lead: ['', Validators.required],
     rep: ['', Validators.required],
     client: ['', Validators.required],
-    value: [null, [Validators.required, Validators.pattern(/^[0-9]/)]],
+    value: [null, [Validators.required, Validators.pattern("^[0-9]*$")]],
     date: [null, Validators.required]
   });
   backendErrorMessage = '';
@@ -33,8 +33,8 @@ export class DialogComponent {
     if (this.leadForm.valid) {
       //converting date to tiemestamp
       // this.leadForm.controls['date'].setValue(new Date(this.leadForm.value.date).getTime());
-      const leadObj = this.leadForm.value;
-      leadObj.date = Date.parse(this.leadForm.value.date)
+      const leadObj = Object.assign({}, this.leadForm.value);
+      leadObj.date = Date.parse(leadObj.date)
       this.isLoading = true;
       this.salesLeadsService.postLead(leadObj).subscribe(
         (response: any) => {

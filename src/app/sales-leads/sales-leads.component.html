@@ -51,7 +51,7 @@
       <!-- date Column -->
       <ng-container matColumnDef="date">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
-        <td [className]="sortedColumn == 'date'? 'highlight' : 'normalWeight'" mat-cell *matCellDef="let element"> {{element.date | date : 'MM/LL/yy'}} </td>
+        <td [className]="sortedColumn == 'date'? 'highlight' : 'normalWeight'" mat-cell *matCellDef="let element"> {{element.date | date : 'MM/dd/y'}} </td>
       </ng-container>
 
       <!-- delete Column -->
