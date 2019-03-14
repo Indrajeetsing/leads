@@ -45,7 +45,7 @@
       <!-- value Column -->
       <ng-container matColumnDef="value">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Value </th>
-        <td [className]="sortedColumn == 'value'? 'highlight' : 'normalWeight'" mat-cell *matCellDef="let element"> {{element.value | currency:'USD':true:'1.0-2'}} </td>
+        <td [className]="sortedColumn == 'value'? 'highlight' : 'normalWeight'" mat-cell *matCellDef="let element"> {{element.value | currency:'USD':$:'1.0-2'}} </td>
       </ng-container>
 
       <!-- date Column -->
