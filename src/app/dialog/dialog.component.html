@@ -16,8 +16,8 @@
     </mat-form-field>
     <mat-form-field appearance="outline">
       <input matInput placeholder="Value" type="number" formControlName="value">
-      <mat-error *ngIf="leadForm.controls['value'].invalid && leadForm.controls['value'].errors.required">Value is required</mat-error>
-      <mat-error *ngIf="leadForm.controls['value'].invalid && leadForm.controls['value'].errors.pattern">Value should be a positive number</mat-error>
+      <mat-error *ngIf="leadForm.controls['value'].errors?.required">Value is required</mat-error>
+      <mat-error *ngIf="leadForm.controls['value'].errors?.pattern">Value should be a positive number</mat-error>
     </mat-form-field>
     <mat-form-field appearance="outline">
       <input matInput [matDatepicker]="picker" placeholder="Date" formControlName="date">
